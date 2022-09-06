@@ -1,0 +1,79 @@
+print('Olá, seja bem-vindo a "Casa da Feijoada" do Ruben Dario Braccini Neto')
+
+
+# Função "Volume de Feijoada":
+def VolumeFeijoada():  # Cliente deve informar o Volume de Feijoada que deseja.
+    while True:
+        try:
+            Volume_mLs = float(input('Por favor, informe a quantidade de mL\'s desejados: '))
+            if 300 <= Volume_mLs <= 5000:
+                ValorVolume = (Volume_mLs * 0.08)
+                return ValorVolume
+            print('Desculpe, não aceitamos porções menores que 300mL ou maiores do que 5L. Por favor, insira valores '
+                  'permitidos.')
+        except:
+            print('Por favor, informe um valor numérico.')
+
+
+# Função "Opção de Feijoada".
+def OpcaoFeijoada():
+    while True:
+        Opcao = input('Informe a opção desejada:\nb - Básica (Feijão + paiol + costelinha)\np - Premium (Feijão '
+                      '+ paiol + costelinha + partes de porco)\ns - Suprema (Feijão + paiol + costelinha + '
+                      'partes do porco + charque + calabresa + bacon)\n Digite "b", "p" ou "s": ')
+        if Opcao == 'b' or Opcao == 'B':
+            multiplicador = 1
+        elif Opcao == 'p' or Opcao == 'P':
+            multiplicador = 1.25
+        elif Opcao == 's' or Opcao == 'S':
+            multiplicador = 1.5
+        else:
+            print('Desculpe, você não digitou uma opção válida. Tente novamente')
+            continue
+        return multiplicador
+
+
+# Função "Acompanhamento de Feijoada".
+def AcompanhamentoFeijoada():
+    Resultado_Ac = float(0)
+    while True:
+        Acomp_Desejado = ValidacaoInt(
+            'Deseja mais algum acompanhamento?\n0- Não desejo mais acompanhamentos (encerrar pedido)\n1- 200g de '
+            'arroz\n2- 150g de farofa especial\n3- 100g de couve cozida\n4- 1 laranja descascada\n> ',
+            0, 4)
+        if Acomp_Desejado == 0:
+            Resultado_Ac += 0
+            return Resultado_Ac
+        elif Acomp_Desejado == 1:
+            Resultado_Ac += 5
+        elif Acomp_Desejado == 2:
+            Resultado_Ac += 6
+        elif Acomp_Desejado == 3:
+            Resultado_Ac += 7
+        else:
+            Resultado_Ac += 3
+
+
+# Validação de Entrada (Int) 0 ou 1:
+def ValidacaoInt(q, min, max):
+    while True:
+        try:
+            x = int(input(q))
+            while (x < min) or (x > max):
+                print('Por favor, informe um valor válido.')
+                x = int(input(q))
+            return x
+        except:
+            print('Por favor, informe um valor válido.')
+
+
+# Informações de saída:
+print('Menu: Volume da Feijoada (em mL).')
+vol = VolumeFeijoada()
+print('Menu: Opções de Feijoada.')
+op = OpcaoFeijoada()
+print('Menu: Acompanhamentos de Feijoada.')
+ac = AcompanhamentoFeijoada()
+print('O valor total a ser pago é de: R${:.2f}. (Volume: {:.2f} * Opção: {:.2f} + Acompanhamentos: {:.2f}).'.format(
+    ((vol * op) + ac), vol, op, ac))
+print('Muito obrigado por escolher a "Casa da Feijoada" do Ruben Dario Braccini Neto! Volte sempre!')
